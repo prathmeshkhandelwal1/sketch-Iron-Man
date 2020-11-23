@@ -1,0 +1,233 @@
+<html>
+<head>
+    <title>I am Iron-Man</title>
+</head>
+<body style="background-color: black;">
+    <center>
+        <canvas id="canvas" height="700" width="500"></canvas>
+    </center>
+    <script>
+        //  piece1=[[-40, 120, -70, 260, -130, 230, -170, 200, -170, 100, -160, 40, -170, 10, -150, -10, -140, 10, -40, -20, 0, -20],[0, -20, 40, -20, 140, 10, 150, -10, 170, 10, 160, 40, 170, 100, 170, 200, 130, 230, 70, 260, 40, 120, 0, 120]]
+         piece2=[[-40, -30, -50, -40, -100, -46, -130, -40, -176, 0, -186, -30, -186, -40, -120, -170, -110, -210, -80, -230, -64, -210, 0, -210],[0, -210, 64, -210, 80, -230, 110, -210, 120, -170, 186, -40, 186, -30, 176, 0, 130, -40, 100, -46, 50, -40, 40, -30, 0, -30]]
+        piece3=[[-60, -220, -80, -240, -110, -220, -120, -250,-90, -280, -60, -260, -30, -260, -20, -250, 0, -250],[0, -250, 20, -250, 30, -260, 60, -260, 90, -280, 120, -250,110, -220, 80, -240, 60, -220, 0, -220]]
+        var canvas = document.getElementById("canvas")
+        // console.log(canvas)
+        let ctx = canvas.getContext("2d");
+        ctx.translate(230,100);
+        ctx.strokeStyle = "red"
+        ctx.beginPath();
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = "red";
+        // ctx.fillStyle = "#fab104"
+        // ctx.fill();
+        // console.log(c)
+        // piece1GotoX=0
+        // piece1GotoY=60
+        // piece2GotoX=0
+        // piece2GotoY=210
+        // piece3GotoX=0
+        // piece3GotoY=400
+        // c.translate(230,100);
+        // c.strokeStyle="yellow"
+        // function draw (X,Y,piece){
+
+        //     var amount = 0;
+
+        //     var x,y
+        //     c.beginPath()
+
+        //     c.moveTo(X,Y)
+                
+        //     for(i=0;i<piece[0].length;i++){
+        //         amount = amount+0.01
+        //         x=piece[0][i];
+        //         y=piece[0][i+1];
+        //         i++;
+        //         let XX = x
+        //         let YY = (180-y)
+        //         // console.log(x*amount,(180-y)*amount)
+        //         c.lineTo(XX,YY)
+        //         console.log("hey")
+        //     }
+           
+            
+        //     for(i=0;i<piece[1].length;i++){
+        //         x=piece[1][i];
+        //         y=piece[1][i+1];
+        //         i++;
+        //         console.log(x,360-y)
+        //         c.lineTo(x,(180-y))
+        //         console.log("hey")
+        //         // c.stroke();
+        //     }
+        // c.closePath()
+        // c.stroke();
+        // c.shadowBlur = 5;
+        // c.shadowColor = "yellow";
+        // c.fillStyle = "#fab104"
+        // c.fill();
+        // }
+        
+        // draw(piece1GotoX,piece1GotoY,piece1);
+        // draw(piece2GotoX,piece2GotoY,piece2);
+        // draw(piece3GotoX,piece3GotoY,piece3);
+        piece1=[[-40, 120, -70, 260, -130, 230, -170, 200, -170, 100, -160, 40, -170, 10, -150, -10, -140, 10, -40, -20, 0, -20],[0, -20, 40, -20, 140, 10, 150, -10, 170, 10, 160, 40, 170, 100, 170, 200, 130, 230, 70, 260, 40, 120, 0, 120]]
+        var vertices1=[];
+        var vertices2=[];
+        var vertices3=[];
+vertices1.push({x:0,y:60});
+vertices2.push({x:0,y:210});
+vertices3.push({x:0,y:400});
+// vertices.push({x:-40,y:120});
+// vertices.push({x:-70,y:260});
+// vertices.push({x:-130,y:230});
+// vertices.push({x:-170,y:200});
+// vertices.push({x:0-170,y:100});
+// vertices.push({x:0-170,y:100});
+// vertices.push({x:0-160,y:40});
+// vertices.push({x:0-160,y:40});
+// vertices.push({x:0-170,y:10});
+// vertices.push({x:0-170,y:10});
+// vertices.push({x:0-150,y:-10});
+// vertices.push({x:0-140,y:10});
+// vertices.push({x:-40,y:-20});
+// vertices.push({x:0,y:-20});
+// vertices.push({x:0,y:-20});
+// vertices.push({x:40,y:-20});
+// vertices.push({x:140,y:10});
+// vertices.push({x:150,y:-10});
+// vertices.push({x:170,y:10});
+// vertices.push({x:160,y:40});
+// vertices.push({x:170,y:100});
+// vertices.push({x:170,y:200});
+// vertices.push({x:130,y:230});
+// vertices.push({x:70,y:260});
+// vertices.push({x:40,y:120});
+// vertices.push({x:0,y:120});
+
+function fillVertices(piece, v){
+    for(let i=0;i<piece[0].length;i++){
+    v.push({
+        x:piece[0][i],
+        y:180-piece[0][i+1]
+    })
+    i++;
+    }
+    for(let i=0;i<piece[1].length;i++){
+        v.push({
+            x:piece[1][i],
+            y:180-piece[1][i+1]
+        })
+        i++;
+    }
+}
+
+fillVertices(piece1,vertices1);
+fillVertices(piece2,vertices2);
+fillVertices(piece3,vertices3);
+console.log(vertices2)
+// for(let i=0;i<piece1[0].length;i++){
+//     vertices.push({
+//         x:piece1[0][i],
+//         y:180-piece1[0][i+1]
+//     })
+//     i++;
+// }
+// for(let i=0;i<piece1[1].length;i++){
+//     vertices.push({
+//         x:piece1[1][i],
+//         y:180-piece1[1][i+1]
+//     })
+//     i++;
+// }
+
+// calc waypoints traveling along vertices
+function calcWaypoints(vertices){
+    var waypoints=[];
+    for(var i=1;i<vertices.length;i++){
+        var pt0=vertices[i-1];
+        var pt1=vertices[i];
+        var dx=pt1.x-pt0.x;
+        var dy=pt1.y-pt0.y;
+        for(var j=0;j<100;j++){
+            var x=pt0.x+dx*j/100;
+            var y=pt0.y+dy*j/100;
+            waypoints.push({x:x,y:y});
+        }
+    }
+    return(waypoints);
+}
+
+var points1=calcWaypoints(vertices1);
+var points2=calcWaypoints(vertices2);
+var points3=calcWaypoints(vertices3);
+
+
+// variable to hold how many frames have elapsed in the animation
+// t represents each waypoint along the path and is incremented in the animation loop
+var t1=1;
+var t2=1;
+var t3=1;
+
+
+// start the animation
+animate1();
+animate2();
+animate3();
+c.closePath()
+c.stroke();
+c.shadowBlur = 5;
+c.shadowColor = "red";
+// c.fillStyle = "#fab104"
+// c.fill();
+// incrementally draw additional line segments along the path
+function animate1(){
+    if(t1<points1.length-1){ requestAnimationFrame(animate1); }
+    // draw a line segment from the last waypoint
+    // to the current waypoint
+    // if(t>2000){
+    //     t=1;
+    // }
+    ctx.beginPath();
+    ctx.moveTo(points1[t1-1].x,points1[t1-1].y);
+    console.log(points1[t1])
+    ctx.lineTo(points1[t1].x,points1[t1].y);
+    ctx.stroke();
+    // ctx.closePath()
+//     c.fillStyle = "#fab104"
+// c.fill();
+    // increment "t" to get the next waypoint
+  
+    t1=t1+1;
+}
+
+function animate2(){
+    if(t2<points2.length-1){ requestAnimationFrame(animate2); }
+    // draw a line segment from the last waypoint
+    // to the current waypoint
+    ctx.beginPath();
+    ctx.moveTo(points2[t2-1].x,points2[t2-1].y);
+    ctx.lineTo(points2[t2].x,points2[t2].y);
+    ctx.stroke();
+    // increment "t" to get the next waypoint
+    t2=t2+1;
+}
+
+function animate3(){
+    if(t3<points3.length-1){ requestAnimationFrame(animate3); }
+    // draw a line segment from the last waypoint
+    // to the current waypoint
+    ctx.beginPath();
+    ctx.moveTo(points3[t3-1].x,points3[t3-1].y);
+    ctx.lineTo(points3[t3].x,points3[t3].y);
+    ctx.stroke();
+    // ctx.closePath()
+    // increment "t" to get the next waypoint
+    t3=t3+1;
+}
+        
+
+        
+    </script>
+</body>
+</html>
