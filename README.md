@@ -4,4 +4,6 @@
 I am Iron Man.
 A simple 2D sketch with some cool animation using canvas.
 <br>
+<br>
+<hr>
 <p align="center"> Made with ❤️ by <a href="https://github.com/prathmeshkhandelwal1">Prathmesh</a></p>
